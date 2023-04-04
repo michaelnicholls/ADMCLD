@@ -2,28 +2,71 @@
   "xsappname": "module00",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
-  "scopes": [{ 
-    "name" : "$XSAPPNAME.Display", 
-    "description" : "display" }, 
-   { 
-    "name" : "$XSAPPNAME.Edit", 
-    "description" : "edit" }],
-  "attributes" : [ { 
-    "name" : "Country", 
-    "description" : "Country", 
-    "valueType" : "string" }, 
-   {
-    "name" : "CostCenter", 
-    "description" : "CostCenter", 
-    "valueType" : "string" } 
- ], 
-  "role-templates": [{ 
-    "name"               : "Editor", 
-    "description"        : "Edit", 
-    "scope-references"   : [ 
-                          "$XSAPPNAME.Edit" ], 
-    "attribute-references" : [ 
-                          "Country", 
-                          "CostCenter"] 
-    } ]
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "display"
+    },
+    {
+      "name": "$XSAPPNAME.Edit",
+      "description": "edit"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Country",
+      "description": "Country",
+      "valueType": "string"
+    },
+    {
+      "name": "CostCenter",
+      "description": "CostCenter",
+      "valueType": "string"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Display",
+      "description": "Display",
+      "scope-references": [
+        "$XSAPPNAME.Display"
+      ],
+      "attribute-references": [
+        {
+          "name": "Country",
+          "default-values": [
+            "Australia"
+          ]
+        },
+        {
+          "name": "CostCenter",
+          "default-values": [
+            "000",
+            "001"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Edit",
+      "description": "Edit",
+      "scope-references": [
+        "$XSAPPNAME.Edit"
+      ],
+      "attribute-references": [
+        "Country",
+        "CostCenter"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "Display and edit",
+      "description": "Display and edit",
+      "role-template-references": [
+        "$XSAPPNAME.Edit",
+        "$XSAPPNAME.Display"
+      ]
+    }
+  ]
 }
